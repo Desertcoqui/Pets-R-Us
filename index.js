@@ -11,7 +11,7 @@ app.listen(PORT, () => {
   console.log("Application started and listening on port" + PORT);
 });
 
-app.engine('.html',require('ejs')._express);
+app.engine('.html',require('ejs').express);
 
 app.set('views',path.join(/views/index.html,'views'));
 app.set('views',path.join(/views/grooming.html,'views'));
