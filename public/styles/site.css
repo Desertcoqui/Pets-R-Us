@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap");
+
 body {
-  font-size: 25px;
+  font-family: "Amatic SC", Impact, "Arial Narrow Bold", sans-serif;
+  background-size: cover;
+  background-image: url(./images/);
+  height: 100%;
+  /* overflow: hidden; */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #ccffe6;
 }

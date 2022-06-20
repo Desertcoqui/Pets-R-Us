@@ -18,6 +18,10 @@ app.get("", (req, res) => {
   res.render("index");
 });
 
+app.get("/grooming", (req, res) => {
+  res.render("grooming");
+});
+
 //Listening on port 3000
 
 app.listen(port, () => {
