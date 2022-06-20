@@ -39,36 +39,28 @@ h2 {
 input {
   font-family: "amatic", sans-serif;
   font-size: 1em;
-  width: 5500px;
+  width: 500px;
   height: 50px;
   padding: 0px 15px 0px 15px;
 
-  color: blueviolet;
-  background-color: beige;
   outline: none;
 
   border: solid 1px #b3aca7;
   border-bottom: none;
 }
 textarea {
-  width: 470px;
-  max-width: 470px;
-  height: 110px;
-  max-height: 110px;
-  padding: 15px;
+  font-family: "amatic", sans-serif;
+  font-size: 1em;
+  width: 500px;
+  height: 50px;
+  padding: 0px 15px 0px 15px;
 
-  background-color: rgb(218, 212, 205, 0.5);
   outline: none;
 
-  color: #726659;
-  font-family: "Lato", sans-serif;
-  font-size: 0.875em;
-
   border: solid 1px #b3aca7;
+  border-bottom: none;
 }
 #submit {
   color: blueviolet;
   background-color: beige;
-  width: 470px;
-  max-width: 470px;
 }
