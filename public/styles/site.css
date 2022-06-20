@@ -10,3 +10,11 @@ body {
   background-attachment: fixed;
   color: #ccffe6;
 }
+
+h1 {
+  font-size: 500px;
+}
+.container {
+  text-align: center;
+  width: max-content 100%;
+}
