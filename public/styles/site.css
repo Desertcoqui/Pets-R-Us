@@ -14,7 +14,61 @@ body {
 h1 {
   font-size: 500px;
 }
+h2 {
+  font-size: 250px;
+  background-color: rgb(41, 38, 38, 0.6);
+  border-bottom: 0;
+}
+
 .container {
   text-align: center;
   width: max-content 100%;
+}
+.paragraph {
+  color: black;
+  font-size: 50px;
+  padding: 10%;
+  background-color: rgb(218, 212, 205, 0.5);
+}
+#form {
+  position: relative;
+  width: 500px;
+  margin: 50px auto 300px auto;
+}
+
+input {
+  font-family: "amatic", sans-serif;
+  font-size: 1em;
+  width: 5500px;
+  height: 50px;
+  padding: 0px 15px 0px 15px;
+
+  color: blueviolet;
+  background-color: beige;
+  outline: none;
+
+  border: solid 1px #b3aca7;
+  border-bottom: none;
+}
+textarea {
+  width: 470px;
+  max-width: 470px;
+  height: 110px;
+  max-height: 110px;
+  padding: 15px;
+
+  background-color: rgb(218, 212, 205, 0.5);
+  outline: none;
+
+  color: #726659;
+  font-family: "Lato", sans-serif;
+  font-size: 0.875em;
+
+  border: solid 1px #b3aca7;
+}
+#submit {
+  color: blueviolet;
+  background-color: beige;
+  width: 470px;
+  max-width: 470px;
 }
