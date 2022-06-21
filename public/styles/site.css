@@ -9,6 +9,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #ccffe6;
+  back
 }
 
 h1 {
@@ -67,4 +68,34 @@ textarea {
 
 ul {
   list-style-type: none;
+}
+
+.navLinks {
+  font-size: 5em;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  background-color: transparent;
+  border: 10px solid rgb(214, 201, 141);
+  padding: 12px;
+  /* .. */
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  /* Had to delete width so nav boarder would show on right side */
+  /* width:90%; */
+  margin-right: 0px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.navLinks a {
+  margin: 15px;
+  display: inline-block;
+  float: left;
+  color: rgb(135, 240, 135);
+}
+.navLinks a:hover {
+  color: rgb(182, 233, 182);
 }
