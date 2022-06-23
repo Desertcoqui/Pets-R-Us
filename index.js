@@ -24,10 +24,10 @@ app.use("/styles/site.css", express.static(__dirname + "public/styles/site.css")
 //HTML Routes
 app.engine(".html", require("ejs").__express);
 app.set("views", "./views");
-app.set("view engine", "html");
+app.set("view engine", "ejs");
 
 app.get("", (req, res) => {
-  res.render("index");
+  res.render("index.html");
 });
 
 app.get("/grooming", (req, res) => {
