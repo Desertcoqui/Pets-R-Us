@@ -139,3 +139,50 @@ tr:nth-child(even) td {
 tr:nth-child(odd) td {
   background-color: rgb(94, 112, 94);
 }
+#al {
+  width: 50%;
+  height: 50%;
+  text-align: left;
+  color: black;
+  font-size: 50px;
+  padding: 2%;
+  background-color: rgb(218, 212, 205, 0.5);
+}
+
+.para p {
+  margin: 15px;
+  overflow: auto;
+  display: block;
+  color: rgb(248, 241, 241);
+  font-size: 50px;
+  background-color: rgb(48, 75, 57);
+  padding: 2%;
+
+  max-width: 80%;
+}
+
+.grid {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.box {
+  border-radius: 3px;
+  border: 1px solid rgb(182, 233, 182);
+  box-shadow: rgb(28, 28, 26);
+}
+.tier {
+  text-align: center;
+  font-size: 5em;
+  color: white;
+  background-color: rgb(156, 164, 119);
+}
+.tier-content {
+  padding: 5px;
+  background-color: rgb(84, 107, 84);
+}
+.tier-prices {
+  padding: 5px;
+  font-size: 50px;
+}

@@ -17,6 +17,7 @@ const port = 3000;
 //Static Files Images, JS, CSS Styles
 app.use(express.static("public"));
 app.use("/images", express.static(__dirname + "public/images"));
+app.use("/public/images", express.static(__dirname + "/public/images"));
 app.use("/js", express.static(__dirname + "public/js"));
 app.use("/styles", express.static(__dirname + "public/styles"));
 app.use("/styles/site.css", express.static(__dirname + "public/styles/site.css"));
