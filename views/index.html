@@ -7,6 +7,7 @@ Description: This week's project is Pets R Us
 https://www.w3schools.com/Css/
 https://www.w3schools.com/Css/css_background.asp
 https://www.w3schools.com/Css/css_background.asp
+https://www.youtube.com/watch?v=lYVKbAn5Od0
 -->
 
 
@@ -24,88 +25,98 @@ https://www.w3schools.com/Css/css_background.asp
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul class="navLinks">
-                <li><a href="index">Home</a></li>
-                <li><a href="grooming">Grooming</a></li>
-                <li><a href="booking">Booking </a></li>
-                <li><a href="boarding">Boarding</a></li>
-                <li><a href="training">Training</a></li>
-                <li><a href="registration">Registration</a></li>
-                <li><a href="login">Login</a></li>
-            </ul>
-        </nav>
+    <%- include('./partials/header.html')%>
 
         <div class="container">
             <h1>Pet-R-US</h1>
         </div>
-    </header>
-    <br>
-    <div class="container">
-        <!-- Location -->
-        <h2>Location</h2>
-        <!-- Hours -->
-        <h2>Open 24 Hours</h2>
-        <p class="paragraph"> We are located in the beautiful newly renovated area of South Town San Antonio Texas. The
-            rich history and
-            our culture is the perfect home your pet needs for all it's needs. We offer Boarding while you and your
-            loved one is away from home. We offer grooming to keep your pet looking as healthy and good as you. As you
-            make yourself at home on our page please do not hesitate to Register on our page and take advantage of our
-            monthly giveaways.
+
+        <br>
+        <div class="container">
+            <!-- Location -->
+            <h2>Location</h2>
+            <!-- Hours -->
+            <h2>Open 24 Hours</h2>
+            <p class="paragraph"> We are located in the beautiful newly renovated area of South Town San Antonio Texas.
+                The
+                rich history and
+                our culture is the perfect home your pet needs for all it's needs. We offer Boarding while you and your
+                loved one is away from home. We offer grooming to keep your pet looking as healthy and good as you. As
+                you
+                make yourself at home on our page please do not hesitate to Register on our page and take advantage of
+                our
+                monthly giveaways.
+                <br>
+                Services we offer: Boarding, Training, Grooming and coming soon Pet Chiropractor
+            </p>
+
+        </div>
+        <br>
+        <!-- dog of the week -->
+        <div class="container">
+            <h2>
+                Dog of the week
+            </h2>
+            <p class="paragraph">
+                Our dog of the week is always featured on our websites background. This week we are delighted to show
+                everyone ROCKO! Rocko first came to us from a family who found him on the side of the road. The family
+                fostered him for a few weeks until he was able to find a loving family :-)
+
+            </p>
+
+
+        </div>
+        <br>
+
+        <div class="container">
+            <!-- testimonials -->
+            <h2>
+                Testimonials
+            </h2>
+            <p class="paragraph">
+                *****
+                <br>
+                I give Pets-R-Us a rating of five out of five. While we were away on vacation they kept us in the loop
+                how
+                our little pooch was doing. We came back from our vacation stress free and happy to know our pet was in
+                good
+                hands.
+
+            </p>
             <br>
-            Services we offer: Boarding, Training, Grooming and coming soon Pet Chiropractor
-        </p>
-
-    </div>
-    <br>
-    <!-- dog of the week -->
-    <div class="container">
-        <h2>
-            Dog of the week
-        </h2>
-        <p class="paragraph">
-            Our dog of the week is always featured on our websites background. This week we are delighted to show
-            everyone ROCKO! Rocko first came to us from a family who found him on the side of the road. The family
-            fostered him for a few weeks until he was able to find a loving family :-)
-
-        </p>
-
-
-    </div>
-    <br>
-
-    <div class="container">
-        <!-- testimonials -->
-        <h2>
-            Testimonials
-        </h2>
-        <p class="paragraph">
-            *****
+            <p class="paragraph">
+                *****
+                <br>
+                We have been coming to Pet-R-Us for the last five years. Are families have had such a wonderful time
+                with
+                all the trainers and care takers.
+            </p>
             <br>
-            I give Pets-R-Us a rating of five out of five. While we were away on vacation they kept us in the loop how
-            our little pooch was doing. We came back from our vacation stress free and happy to know our pet was in good
-            hands.
+            <p class="paragraph">
+                *****
+                <br>
+                When we first moved here we didn't have many options for places to take our pets. Now when we go on our
+                long
+                trips we have the peace of mind that our 10yr old sheep dog is well taken care of,
+            </p>
+        </div>
+        <br>
+        <div class="container">
 
-        </p>
-    </div>
-    <br>
-    <div class="container">
+            <!-- contact form -->
+            <h2>Contact Us</h2>
+            <form id="form">
 
-        <!-- contact form -->
-        <h2>Contact Us</h2>
-        <form id="form" class="topBefore">
+                <input type="text" placeholder="NAME">
+                <input type="text" placeholder="E-MAIL">
+                <input type="text" placeholder="Tell Us About your Pet or MESSAGE us">
+                <input id="submit" type="submit" value="CONTACT US">
 
-            <input type="text" placeholder="NAME">
-            <input type="text" placeholder="E-MAIL">
-            <input id="message" type="text" placeholder="Tell Us About your Pet or MESSAGE us"></input>
-            <input id="submit" type="submit" value="CONTACT US">
-
-        </form>
+            </form>
 
 
-    </div>
-    <br>
+        </div>
+        <br>
 
 
 </body>
