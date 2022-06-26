@@ -108,17 +108,18 @@ https://www.youtube.com/watch?v=lYVKbAn5Od0
             <form id="form">
 
                 <input type="text" placeholder="NAME">
-                <input type="text" placeholder="E-MAIL">
-                <input type="text" placeholder="Tell Us About your Pet or MESSAGE us">
-                <input id="submit" type="submit" value="CONTACT US">
+                <input type="email" placeholder="E-MAIL">
+                <input type="text" placeholder="Message US">
+
+                <button id="submit" type="submit"><span>Submit</span></button>
 
             </form>
 
 
         </div>
         <br>
-
-
+        <%- include('./partials/contactForm.html')%>
+            <%- include('./partials/footer.html')%>
 </body>
 
 

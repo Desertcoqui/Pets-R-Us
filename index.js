@@ -29,13 +29,21 @@ app.set("view engine", "ejs");
 app.get("", (req, res) => {
   res.render("index.html");
 });
-
+//Grooming Page
 app.get("/grooming", (req, res) => {
   res.render("grooming.html");
 });
-
+//Landing Page
 app.get("/index", (req, res) => {
   res.render("index.html");
+});
+//Boarding Page
+app.get("/boarding", (req, res) => {
+  res.render("boarding.html");
+});
+//Training Page
+app.get("/training", (req, res) => {
+  res.render("training.html");
 });
 
 //Listening on port 3000

@@ -35,7 +35,7 @@ h2 {
 #form {
   position: relative;
   width: 500px;
-  margin: 50px auto 300px auto;
+  margin: 50px auto 100px auto;
 }
 
 input {
@@ -44,33 +44,26 @@ input {
   width: 500px;
   height: 50px;
   padding: 0px 15px 0px 15px;
-
   outline: none;
 
   border: solid 1px #b3aca7;
   border-bottom: none;
 }
-textarea {
-  font-family: "amatic", sans-serif;
-  font-size: 1em;
-  width: 500px;
-  height: 50px;
-  padding: 0px 15px 0px 15px;
 
-  outline: none;
-
-  border: solid 1px #b3aca7;
-  border-bottom: none;
+input:hover {
+  background: #ae9c8f;
 }
+
 #submit {
-  color: blueviolet;
-  background-color: beige;
+  width: 532px;
+  height: 50px;
+  box-sizing: border-box;
 }
 
 ul {
   list-style-type: none;
 }
-
+/* HEADER NAV BAR */
 .navLinks {
   font-size: 5em;
   list-style: none;
@@ -100,4 +93,17 @@ ul {
 }
 .navLinks a:hover {
   color: rgb(182, 233, 182);
+}
+
+#footer {
+  position: fixed;
+  font-size: 25px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5%;
+  color: rgb(28, 28, 26);
+  background-color: rgb(182, 233, 182);
+  text-align: left;
+  padding-left: 20px;
 }
