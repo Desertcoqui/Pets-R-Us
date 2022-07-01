@@ -15,6 +15,10 @@ https://css-tricks.com/snippets/css/complete-guide-grid/
 
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap");
 
+:root {
+  --clr-primary: #ccffe6;
+}
+
 body {
   font-family: "Amatic SC", Impact, "Arial Narrow Bold", sans-serif;
   background-size: cover;
@@ -24,7 +28,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #ccffe6;
-  background-position: 0px 200px;
+  background-position: 0px 4em;
 }
 
 h1 {
@@ -81,34 +85,36 @@ ul {
   list-style-type: none;
 }
 /* HEADER NAV BAR */
-.navLinks {
-  font-size: 5em;
+.nav-list {
+  font-size: 2em;
   list-style: none;
+  box-shadow: 0px 5px 10px gray;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   background-color: rgb(244, 244, 234);
   border: 10px solid rgb(214, 201, 141);
-  padding: 12px;
-  /* .. */
+  padding: 0.5em;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  /* Had to delete width so nav boarder would show on right side */
-  /* width:90%; */
+
   margin-right: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
   margin-top: 5px;
-  text-align: center;
 }
 
-.navLinks a {
-  margin: 15px;
-  display: inline-block;
+.nav-item {
+  margin: 1em;
+  display: inline-flexbox;
+}
+
+.nav-item a {
   float: left;
   color: rgb(135, 240, 135);
 }
-.navLinks a:hover {
+.nav-item a:hover {
   color: rgb(182, 233, 182);
 }
 
