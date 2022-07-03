@@ -49,6 +49,11 @@ app.get("/training", (req, res) => {
   res.render("training.html");
 });
 
+//Registration
+app.get("/registration", (req, res) => {
+  res.render("registration.html");
+});
+
 //Listening on port 3000
 
 app.listen(port, () => {

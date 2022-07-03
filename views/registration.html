@@ -5,12 +5,101 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="PEt-R-Us">
+    <link rel="stylesheet" href="/styles/site.css" />
 
-    <title>IPSOM</title>
+    <title>Pet-R-Us</title>
 </head>
 
 <body>
+    <%- include('./partials/header.html')%>
 
+
+        <form action="/action_page.php">
+            <div class="container">
+                <h1>Register</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
+
+                <label for="psw"><b>USER NAME</b></label>
+                <input type="text" placeholder="USER NAME" name="username" id="username" required>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="password" id="password" required>
+                <hr>
+
+
+                <button type="submit" class="registerBtn">Register</button>
+            </div>
+            <table class="center">
+                <tr>
+                    <th>
+                        USERNAME
+                    </th>
+                    <th>
+                        EMAIL
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+
+                    </td>
+
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+
+                    </td>
+
+                    <td>
+
+                    </td>
+                </tr>
+
+            </table>
+
+
+        </form>
+
+
+
+
+        <br>
+
+
+
+        </div>
+
+
+        <br>
+        <%- include('./partials/contactForm.html')%>
+            <%- include('./partials/footer.html')%>
 </body>
 
 
