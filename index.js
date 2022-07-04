@@ -12,9 +12,28 @@
 // -->
 
 const express = require("express");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const mongoose = require("mongoose");
+const path = require("path");
 
 const app = express();
 const port = 3000;
+
+const User = require("./models/user");
+
+var connect = "mongodb+srv://papo:WhoCares$8@buwebdev-cluster-1.omearcz.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose
+  .connect(CONN)
+  .then(() => {
+    console.log("Connection to MongoDB database was successful");
+  })
+  .catch((err) => {
+    console.log("MongoDB Error: " + err.message);
+  });
 
 //Static Files Images, JS, CSS Styles
 app.use(express.static("public"));
