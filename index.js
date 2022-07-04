@@ -17,15 +17,17 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const mongoose = require("mongoose");
-const path = require("path");
+// const path = require("path");
+// const moment = require("moment");
 
 const app = express();
 const port = 3000;
 
-const User = require("./models/user");
+//mongoose import
+const User = require("./models/user.js");
 
-var connect = "mongodb+srv://papo:WhoCares$8@buwebdev-cluster-1.omearcz.mongodb.net/?retryWrites=true&w=majority";
-
+var CONN = "mongodb+srv://papo:WhoCares$8@buwebdev-cluster-1.omearcz.mongodb.net/testDB?retryWrites=true&w=majority";
+//Mongoose connection
 mongoose
   .connect(CONN)
   .then(() => {
@@ -48,9 +50,27 @@ app.engine(".html", require("ejs").__express);
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-app.get("", (req, res) => {
-  res.render("index.html");
-});
+//Forms and JSON objects
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "s3cret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+//Passport
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //Grooming Page
 app.get("/grooming", (req, res) => {
   res.render("grooming.html");
@@ -68,13 +88,54 @@ app.get("/training", (req, res) => {
   res.render("training.html");
 });
 
-//Registration
-app.get("/registration", (req, res) => {
-  res.render("registration.html");
-});
-
 //Listening on port 3000
 
 app.listen(port, () => {
   console.log("Application started and listening on port" + port);
+});
+
+//Registration Form
+app.get("/registration", (req, res) => {
+  User.find({}, function (err, users) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("registration.html", {
+        users: users,
+      });
+    }
+  });
+});
+
+app.post("/registration", (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  User.register(new User({ username: username }), password, function (err, user) {
+    if (err) {
+      console.log(err);
+      return res.redirect("/registration");
+    }
+
+    passport.authenticate("local")(req, res, function () {
+      res.redirect("/registration");
+    });
+  });
+});
+
+app.post("/users", (req, res) => {
+  const userName = req.body.userName;
+
+  console.log(req.body);
+  let user = new User({
+    name: userName,
+  });
+
+  User.create(user, function (err, users) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/");
+    }
+  });
 });

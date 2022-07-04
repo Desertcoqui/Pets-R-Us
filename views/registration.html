@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="/styles/site.css" />
 
     <title>Pet-R-Us</title>
+    <script>
+        const email=document.getElementById("email");
+
+    </script>
 </head>
 
 <body>
     <%- include('./partials/header.html')%>
 
 
-        <form action="/register" method="post">
+        <form action="/registration" method="post">
             <div class="container">
                 <h1>Register</h1>
                 <p>Please fill in this form to create an account.</p>
@@ -23,7 +27,7 @@
                 <label for="psw"><b>USER NAME</b></label>
                 <input type="text" placeholder="USER NAME" name="username" id="username" required>
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" required>
+                <input type="email" placeholder="Enter Email" name="email" id="email" required>
 
 
 
@@ -32,59 +36,31 @@
                 <hr>
 
 
-                <button type="submit" class="registerBtn">Register</button>
+                <button type="submit" value="Register" class="registerBtn">Register</button>
             </div>
-            <table class="center">
-                <tr>
-                    <th>
-                        USERNAME
-                    </th>
-                    <th>
-                        EMAIL
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-
-                    </td>
-
-                    <td>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-
-                    </td>
-
-                    <td>
-
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>
-
-                    </td>
-
-                    <td>
-
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>
-
-                    </td>
-
-                    <td>
-
-                    </td>
-                </tr>
-
-            </table>
-
-
+            <div class="card-content">
+                <% if(users.length> 0) { %>
+                    <table class="center">
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                        </tr>
+                        <tbody>
+                            <% users.forEach(function(user) { %>
+                                <tr>
+                                    <td>
+                                        <%= user.username %>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <h3>Users have not been added to the MongoDB database. Try adding some!</h3>
+                        <% } %>
+            </div>
         </form>
 
 
