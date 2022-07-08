@@ -13,7 +13,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 let userSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
-  // email: { type: String, required: true },
+  // email: { type: String },
 });
 
 userSchema.plugin(passportLocalMongoose);

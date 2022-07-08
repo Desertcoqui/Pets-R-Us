@@ -129,20 +129,3 @@ app.post("/registration", (req, res, next) => {
     });
   });
 });
-
-app.post("/users", (req, res) => {
-  const userName = req.body.userName;
-
-  console.log(req.body);
-  let user = new User({
-    name: userName,
-  });
-
-  User.create(user, function (err, users) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/");
-    }
-  });
-});
