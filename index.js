@@ -117,8 +117,9 @@ app.get("/registration", (req, res) => {
 app.post("/registration", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
 
-  User.register(new User({ username: username }), password, function (err, user) {
+  User.register(new User({ username: username, email: email }), password, function (err, user) {
     if (err) {
       console.log(err);
       return res.redirect("/registration");
