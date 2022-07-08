@@ -72,6 +72,12 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//localhost:3000 default
+
+app.get("", (req, res) => {
+  res.render("index.html");
+});
+
 //Grooming Page
 app.get("/grooming", (req, res) => {
   res.render("grooming.html");
