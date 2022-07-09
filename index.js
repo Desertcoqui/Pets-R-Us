@@ -11,6 +11,7 @@
 //https://www.youtube.com/watch?v=SQqSMDIzhaE
 //https://www.securecoding.com/blog/using-helmetjs/
 //https://expressjs.com/en/resources/middleware/csurf.html
+//https://medium.com/passportjs/fixing-session-fixation-b2b68619c51d
 
 // -->
 
@@ -70,15 +71,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/form", csurfProtection, function (req, res) {
-  // pass the csrfToken to the view
-  res.render("send", { csrfToken: req.csrfToken() });
-});
+// app.get("/form", csurfProtection, function (req, res) {
+//   // pass the csrfToken to the view
+//   res.render("send", { csrfToken: req.csrfToken() });
+// });
 
 //Helmet method that prevents cross-site scripting
 app.use(helmet.xssFilter());
 
-//Forms and JSON objects
+//Express
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
@@ -88,6 +89,12 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// //global variable
+// app.get("*", function (req, res, next) {
+//   res.locals.user = req.user || null;
+//   next();
+// });
 
 //Passport
 app.use(passport.initialize());
@@ -121,8 +128,9 @@ app.get("/training", (req, res) => {
 });
 //Login Page
 app.get("/login", (req, res) => {
-  res.render("login.html");
+  res.render("login.html", { csrfToken: req.csrfToken() });
 });
+//Logout
 
 //Listening on port 3000
 
@@ -131,7 +139,7 @@ app.listen(port, () => {
 });
 
 //Registration Form Post
-app.post("/registration", csurfProtection, (req, res, next) => {
+app.post("/registration", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
@@ -139,11 +147,11 @@ app.post("/registration", csurfProtection, (req, res, next) => {
   User.register(new User({ username: username, email: email }), password, function (err, user) {
     if (err) {
       console.log(err);
-      return res.redirect("/registration");
+      return res.redirect("/registration", { csrfToken: req.csrfToken() });
     }
 
     passport.authenticate("local")(req, res, function () {
-      res.redirect("/registration");
+      res.redirect("/registration", { csrfToken: req.csrfToken() });
     });
   });
 });
@@ -155,6 +163,7 @@ app.get("/registration", (req, res) => {
     } else {
       res.render("registration.html", {
         users: users,
+        csrfToken: req.csrfToken(),
       });
     }
   });
@@ -163,7 +172,6 @@ app.get("/registration", (req, res) => {
 //Login/Logout
 app.post(
   "/login",
-  csurfProtection,
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
@@ -171,7 +179,11 @@ app.post(
   function (req, res) {}
 );
 
-app.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
+app.get("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login", { csrfToken: req.csrfToken() });
+  });
 });
