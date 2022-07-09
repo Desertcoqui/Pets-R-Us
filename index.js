@@ -12,6 +12,7 @@
 //https://www.securecoding.com/blog/using-helmetjs/
 //https://expressjs.com/en/resources/middleware/csurf.html
 //https://medium.com/passportjs/fixing-session-fixation-b2b68619c51d
+//https://codedec.com/tutorials/logout-using-passport-module-in-node-js/
 
 // -->
 
@@ -71,11 +72,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get("/form", csurfProtection, function (req, res) {
-//   // pass the csrfToken to the view
-//   res.render("send", { csrfToken: req.csrfToken() });
-// });
-
 //Helmet method that prevents cross-site scripting
 app.use(helmet.xssFilter());
 
@@ -90,12 +86,6 @@ app.use(
   })
 );
 
-// //global variable
-// app.get("*", function (req, res, next) {
-//   res.locals.user = req.user || null;
-//   next();
-// });
-
 //Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -104,6 +94,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function (req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 //localhost:3000 default
 
 app.get("", (req, res) => {
@@ -147,11 +141,11 @@ app.post("/registration", (req, res, next) => {
   User.register(new User({ username: username, email: email }), password, function (err, user) {
     if (err) {
       console.log(err);
-      return res.redirect("/registration", { csrfToken: req.csrfToken() });
+      return res.redirect("/registration");
     }
 
     passport.authenticate("local")(req, res, function () {
-      res.redirect("/registration", { csrfToken: req.csrfToken() });
+      res.redirect("/registration");
     });
   });
 });
@@ -169,7 +163,8 @@ app.get("/registration", (req, res) => {
   });
 });
 
-//Login/Logout
+//log in/out
+
 app.post(
   "/login",
   passport.authenticate("local", {
@@ -178,12 +173,11 @@ app.post(
   }),
   function (req, res) {}
 );
-
 app.get("/logout", function (req, res, next) {
   req.logout(function (err) {
     if (err) {
       return next(err);
     }
-    res.redirect("/login", { csrfToken: req.csrfToken() });
+    res.redirect("/login");
   });
 });
