@@ -5,12 +5,53 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="PEt-R-Us">
+    <link rel="stylesheet" href="/styles/site.css" />
 
-    <title>IPSOM</title>
+    <title>Pet-R-Us</title>
+    <script>
+        const email=document.getElementById("email");
+
+    </script>
 </head>
 
 <body>
+    <%- include('./partials/header.html')%>
 
+
+        <form action="/login" method="post">
+            <input name="_csrf" type="hidden" value="<%= csrfToken %>" />
+            <div class="container">
+                <h1>Login</h1>
+
+                <hr>
+
+                <label for="username"><b>USER NAME</b></label>
+                <input type="text" placeholder="USER NAME" name="username" id="username" required>
+
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="password" id="password" required>
+                <hr>
+
+
+                <button type="submit" value="login" class="login">Login</button>
+            </div>
+
+        </form>
+
+
+
+
+        <br>
+
+
+
+        </div>
+
+
+        <br>
+        <%- include('./partials/contactForm.html')%>
+            <%- include('./partials/footer.html')%>
 </body>
 
 

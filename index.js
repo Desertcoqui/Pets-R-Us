@@ -1,7 +1,7 @@
 // <!--
 // Title: Assignment 4
 // Author: Professor Krasso
-// Date: 26 June 20222
+// Date: 8 July 20222
 // Modified By: Ferdinand "Papo" Detres Jr
 // Description: This week's project is Pets R Us
 // https://www.w3schools.com/Css/
@@ -9,6 +9,8 @@
 // https://www.w3schools.com/Css/css_background.asp
 //https://www.youtube.com/watch?v=H5K_WGg5rhE
 //https://www.youtube.com/watch?v=SQqSMDIzhaE
+//https://www.securecoding.com/blog/using-helmetjs/
+//https://expressjs.com/en/resources/middleware/csurf.html
 
 // -->
 
@@ -18,15 +20,16 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const mongoose = require("mongoose");
-// const path = require("path");
-// const moment = require("moment");
-
+const helmet = require("helmet");
+const bodyParser = require("body-parser");
+const csrf = require("csurf");
+const csurfProtection = csrf({ cookie: true });
 const app = express();
-const port = 3000;
 
 //mongoose import
 const User = require("./models/user.js");
 
+const port = 3000;
 var CONN = "mongodb+srv://papo:WhoCares$8@buwebdev-cluster-1.omearcz.mongodb.net/testDB?retryWrites=true&w=majority";
 //Mongoose connection
 mongoose
@@ -38,6 +41,11 @@ mongoose
     console.log("MongoDB Error: " + err.message);
   });
 
+//HTML Routes
+app.engine(".html", require("ejs").__express);
+app.set("views", "./views");
+app.set("view engine", "ejs");
+
 //Static Files Images, JS, CSS Styles
 app.use(express.static("public"));
 app.use("/images", express.static(__dirname + "public/images"));
@@ -45,17 +53,34 @@ app.use("/public/images", express.static(__dirname + "/public/images"));
 app.use("/js", express.static(__dirname + "public/js"));
 app.use("/styles", express.static(__dirname + "public/styles"));
 app.use("/styles/site.css", express.static(__dirname + "public/styles/site.css"));
+//MiddleWare
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(cookieParser());
 
-//HTML Routes
-app.engine(".html", require("ejs").__express);
-app.set("views", "./views");
-app.set("view engine", "ejs");
+//CSRF
+app.use(csurfProtection);
+app.use((req, res, next) => {
+  const token = req.csrfToken();
+  res.cookie("XSRF-TOKEN", token);
+  res.locals.csrfToken = token;
+  next();
+});
+
+app.get("/form", csurfProtection, function (req, res) {
+  // pass the csrfToken to the view
+  res.render("send", { csrfToken: req.csrfToken() });
+});
+
+//Helmet method that prevents cross-site scripting
+app.use(helmet.xssFilter());
 
 //Forms and JSON objects
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-app.use(cookieParser());
 app.use(
   session({
     secret: "s3cret",
@@ -63,8 +88,8 @@ app.use(
     saveUninitialized: true,
   })
 );
-//Passport
 
+//Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -94,6 +119,10 @@ app.get("/boarding", (req, res) => {
 app.get("/training", (req, res) => {
   res.render("training.html");
 });
+//Login Page
+app.get("/login", (req, res) => {
+  res.render("login.html");
+});
 
 //Listening on port 3000
 
@@ -101,20 +130,8 @@ app.listen(port, () => {
   console.log("Application started and listening on port" + port);
 });
 
-//Registration Form
-app.get("/registration", (req, res) => {
-  User.find({}, function (err, users) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("registration.html", {
-        users: users,
-      });
-    }
-  });
-});
-
-app.post("/registration", (req, res, next) => {
+//Registration Form Post
+app.post("/registration", csurfProtection, (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
@@ -129,4 +146,32 @@ app.post("/registration", (req, res, next) => {
       res.redirect("/registration");
     });
   });
+});
+//Registration Form Get
+app.get("/registration", (req, res) => {
+  User.find({}, function (err, users) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("registration.html", {
+        users: users,
+      });
+    }
+  });
+});
+
+//Login/Logout
+app.post(
+  "/login",
+  csurfProtection,
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  }),
+  function (req, res) {}
+);
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
