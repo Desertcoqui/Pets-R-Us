@@ -126,7 +126,7 @@ app.get("/training", (req, res) => {
   res.render("training.html");
 });
 //Booking Page
-app.get("/booking", ensureAuthenticated, (req, res, next) => {
+app.get("/booking", isLoggedIn, (req, res, next) => {
   let servicesJsonFile = fs.readFileSync("./public/data/services.json");
   let services = JSON.parse(servicesJsonFile);
   res.render("booking.html", {
@@ -134,7 +134,7 @@ app.get("/booking", ensureAuthenticated, (req, res, next) => {
   });
 });
 
-app.post("/booking", ensureAuthenticated, (req, res, next) => {
+app.post("/booking", isLoggedIn, (req, res, next) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const service = req.body.service;
@@ -212,7 +212,7 @@ app.get("/logout", function (req, res, next) {
   });
 });
 
-function ensureAuthenticated(req, res, next) {
+function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
