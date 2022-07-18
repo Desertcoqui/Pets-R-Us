@@ -1,3 +1,18 @@
+<!-- 
+Title: Assignment 4
+Author: Professor Krasso
+Date: 19 June 20222
+Modified By: Ferdinand "Papo" Detres Jr
+Description: This week's project is Pets R Us
+https://www.w3schools.com/Css/
+https://www.w3schools.com/Css/css_background.asp
+https://www.w3schools.com/Css/css_background.asp
+https://www.youtube.com/watch?v=lYVKbAn5Od0
+https://www.youtube.com/watch?v=H5K_WGg5rhE
+-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +20,69 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="PEt-R-Us">
+    <link rel="stylesheet" href="/styles/site.css" />
 
-    <title>IPSOM</title>
+    <title>Booking</title>
+    <script>
+
+    </script>
 </head>
 
 <body>
+    <%- include('./partials/header.html')%>
 
+
+        <div class="container">
+            <h2 class="booking">Book your Appointment</h2>
+            <form action="/booking" method="post">
+                <input name="_csrf" type="hidden" value="<%= csrfToken %>" />
+                <div class="container">
+                    <hr>
+
+                    <!-- First Name -->
+                    <label for="firstName"><b>First name</b></label>
+                    <input type="text" name="firstName" id="firstName" required>
+                    <br>
+                    <!-- Last Name -->
+                    <label for="lastName"><b>Last name</b></label>
+                    <input type="text" name="lastName" id="lastName" required>
+                    <br>
+                    <!-- Email -->
+
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" name="email" id="email" required>
+                    <!-- Services -->
+                    <br>
+                    <label for="service"><b>Service</b></label>
+                    <!-- Imported JSON file -->
+                    <select name="service" id="service">
+                        <% services.forEach((service)=> {
+                            %>
+                            <option value="<%= service.value %>">
+                                <%= service.text %>
+                            </option>
+
+                            <% }) %>
+
+                    </select>
+
+                    <br>
+
+                    <button type="submit" class="login">Book</button>
+                    <hr>
+
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+
+        <%- include('./partials/contactForm.html')%>
+            <%- include('./partials/footer.html')%>
 </body>
 
 

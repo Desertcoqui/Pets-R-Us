@@ -13,17 +13,21 @@ https://www.youtube.com/watch?v=lYVKbAn5Od0
         <ul class="nav-list">
             <li class="nav-item"><a href="index">Home</a></li>
             <li class="nav-item"><a href="grooming">Grooming</a></li>
-            <li class="nav-item"><a href="booking">Booking </a></li>
             <li class="nav-item"><a href="boarding">Boarding</a></li>
             <li class="nav-item"><a href="training">Training</a></li>
-
             <%if(!currentUser){%>
-                <li class="nav-item"><a href="login">Login</a></li>
-                <li class="nav-item"><a href="registration">Registration</a></li>
-                <%}else{%>
 
+
+
+                <li class="nav-item"><a href="registration">Registration</a></li>
+                <li class="nav-item"><a href="login">Login</a></li>
+
+                <%}else{%>
+                    <li class="nav-item"><a href="booking">Booking </a></li>
                     <li class="nav-item"><a href="logout">logout</a></li>
                     <%}%>
+
+
         </ul>
     </navbar>
 

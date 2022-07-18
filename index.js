@@ -23,16 +23,21 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
+const whatsTheDeal = require("alert");
 const bodyParser = require("body-parser");
 const csrf = require("csurf");
 const csurfProtection = csrf({ cookie: true });
 const app = express();
+const fs = require("fs");
 
-//mongoose import
+//mongoose import models
 const User = require("./models/user.js");
+const Schedule = require("./models/schedule.js");
+const { db } = require("./models/user.js");
 
 const port = 3000;
 var CONN = "mongodb+srv://papo:WhoCares$8@buwebdev-cluster-1.omearcz.mongodb.net/testDB?retryWrites=true&w=majority";
+
 //Mongoose connection
 mongoose
   .connect(CONN)
@@ -120,6 +125,33 @@ app.get("/boarding", (req, res) => {
 app.get("/training", (req, res) => {
   res.render("training.html");
 });
+//Booking Page
+// --------------------------------------------------------------
+app.get("/booking", ensureAuthenticated, (req, res, next) => {
+  let servicesJsonFile = fs.readFileSync("./public/data/services.json");
+  let services = JSON.parse(servicesJsonFile);
+  res.render("booking.html", {
+    services,
+  });
+});
+
+app.post("/booking", ensureAuthenticated, (req, res, next) => {
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const service = req.body.service;
+  const email = req.body.email;
+
+  let newSchedule = new Schedule({
+    firstName,
+    lastName,
+    service,
+    email,
+  });
+  whatsTheDeal("Thanks for Scheduling your appointment ");
+  newSchedule.save();
+  res.redirect("/index");
+});
+// --------------------------------------------------------------------------------
 //Login Page
 app.get("/login", (req, res) => {
   res.render("login.html", { csrfToken: req.csrfToken() });
@@ -145,7 +177,7 @@ app.post("/registration", (req, res, next) => {
     }
 
     passport.authenticate("local")(req, res, function () {
-      res.redirect("/registration");
+      res.redirect("/index");
     });
   });
 });
@@ -181,3 +213,12 @@ app.get("/logout", function (req, res, next) {
     res.redirect("/login");
   });
 });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    whatsTheDeal("Woof Woof! Please Log in/ or register first");
+    res.redirect("/index");
+  }
+}

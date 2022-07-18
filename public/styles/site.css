@@ -207,3 +207,9 @@ tr:nth-child(odd) td {
   padding: 5px;
   font-size: 50px;
 }
+
+/* added classes */
+
+.booking {
+  margin-top: 3em;
+}
