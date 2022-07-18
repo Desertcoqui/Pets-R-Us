@@ -126,7 +126,6 @@ app.get("/training", (req, res) => {
   res.render("training.html");
 });
 //Booking Page
-// --------------------------------------------------------------
 app.get("/booking", ensureAuthenticated, (req, res, next) => {
   let servicesJsonFile = fs.readFileSync("./public/data/services.json");
   let services = JSON.parse(servicesJsonFile);
@@ -151,7 +150,6 @@ app.post("/booking", ensureAuthenticated, (req, res, next) => {
   newSchedule.save();
   res.redirect("/index");
 });
-// --------------------------------------------------------------------------------
 //Login Page
 app.get("/login", (req, res) => {
   res.render("login.html", { csrfToken: req.csrfToken() });
