@@ -7,6 +7,10 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desertcoqui/pets-r-us.git"
+  },
   "author": "Ferdinand Detres Jr",
   "license": "MIT",
   "dependencies": {
