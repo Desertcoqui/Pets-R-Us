@@ -34,6 +34,7 @@ const fs = require("fs");
 const User = require("./models/user.js");
 const Schedule = require("./models/schedule.js");
 const { db } = require("./models/user.js");
+const schedule = require("./models/schedule.js");
 
 const port = 3000;
 var CONN = "mongodb+srv://papo:WhoCares$8@buwebdev-cluster-1.omearcz.mongodb.net/testDB?retryWrites=true&w=majority";
@@ -108,6 +109,10 @@ app.use(function (req, res, next) {
 app.get("", (req, res) => {
   res.render("index.html");
 });
+//Profile Page
+app.get("/profile", (req, res) => {
+  res.render("profile.html");
+});
 
 //Grooming Page
 app.get("/grooming", (req, res) => {
@@ -150,13 +155,25 @@ app.post("/booking", isLoggedIn, (req, res, next) => {
   newSchedule.save();
   res.redirect("/index");
 });
+
+//get array of user info
+app.get("/appointments", (req, res) => {
+  Schedule.find()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 //Login Page
 app.get("/login", (req, res) => {
   res.render("login.html", { csrfToken: req.csrfToken() });
 });
 //Logout
 
-//Listening on port 3000
+//Listening on port 3000/wiring up express server
 
 app.listen(port, () => {
   console.log("Application started and listening on port" + port);

@@ -1,0 +1,77 @@
+<!-- 
+Title: Assignment 4
+Author: Professor Krasso
+Date: July 24 20222
+Modified By: Ferdinand "Papo" Detres Jr
+Description: This week's project is Pets R Us
+https://www.w3schools.com/Css/
+https://www.w3schools.com/Css/css_background.asp
+https://www.w3schools.com/Css/css_background.asp
+https://www.youtube.com/watch?v=lYVKbAn5Od0
+https://www.youtube.com/watch?v=H5K_WGg5rhE
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pets-R-Us">
+    <link rel="stylesheet" href="/styles/site.css" />
+
+    <title>Profile</title>
+    <script>
+
+
+        fetch('/appointments')
+            .then(res => res.json())
+            .then(data => {
+                let table=`<br /><h1>My Appointments</h1><table id="appointments" class="table"><tr><th>First name</th><th>Last name</th><th>Email</th><th>Service</th></tr>`;
+
+                for(let appointments of data) {
+                    tableString+=`<tr><td>${appointments.firstName}</td><td>${appointments.lastName}</td><td>${appointments.email}</td><td>${appointments.service}</td></tr>`;
+                }
+
+                table+`</table>`;
+
+                document.getElementById('appointments').innerHTML=tableString;
+            });
+
+    </script>
+</head>
+
+<body>
+    <%- include('./partials/header.html')%>
+
+
+        <div class="container">
+
+            <div>
+                <h2 class="booking">Appointments</h2>
+                <table id="appointments">
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Service</th>
+                    </tr>
+
+                </table>
+            </div>
+
+
+        </div>
+
+
+
+        <%- include('./partials/contactForm.html')%>
+            <%- include('./partials/footer.html')%>
+</body>
+
+
+
+
+</html>
