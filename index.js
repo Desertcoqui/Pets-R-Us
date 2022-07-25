@@ -109,10 +109,6 @@ app.use(function (req, res, next) {
 app.get("", (req, res) => {
   res.render("index.html");
 });
-//Profile Page
-app.get("/profile", (req, res) => {
-  res.render("profile.html");
-});
 
 //Grooming Page
 app.get("/grooming", (req, res) => {
@@ -157,16 +153,44 @@ app.post("/booking", isLoggedIn, (req, res, next) => {
 });
 
 //get array of user info
-app.get("/appointments", (req, res) => {
-  Schedule.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
+app.get("/appointment", isLoggedIn, async (req, res) => {
+  schedule.find({}, function (err, newAppointment) {
+    if (err) {
       console.log(err);
-    });
+    } else {
+      res.json(newAppointment);
+    }
+  });
+});
+//profile
+app.get("/profile", isLoggedIn, async (req, res) => {
+  let username = req.session.passport.user;
+  let email = req.user.email;
+  res.locals.currentUser = username;
+  schedule.findOne({ email: email }, function (err, appointment) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("profile.html", {
+        appointment: appointment,
+        email: email,
+        username: username,
+      });
+    }
+    console.log(email);
+    console.log(appointment);
+  });
 });
 
+app.post("/profile", (req, res) => {
+  const userProfile = {
+    username: currentUser.username,
+    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+  };
+  console.log(userProfile);
+});
 //Login Page
 app.get("/login", (req, res) => {
   res.render("login.html", { csrfToken: req.csrfToken() });
