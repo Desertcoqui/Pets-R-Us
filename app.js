@@ -29,6 +29,7 @@ const csrf = require("csurf");
 const csurfProtection = csrf({ cookie: true });
 const app = express();
 const fs = require("fs");
+const http = require("http");
 
 //mongoose import models
 const User = require("./models/user.js");
@@ -36,7 +37,7 @@ const Schedule = require("./models/schedule.js");
 const { db } = require("./models/user.js");
 const schedule = require("./models/schedule.js");
 
-const port = 3000;
+// const port = 3000;
 var CONN = "mongodb+srv://papo:WhoCares$8@buwebdev-cluster-1.omearcz.mongodb.net/testDB?retryWrites=true&w=majority";
 
 //Mongoose connection
@@ -49,10 +50,17 @@ mongoose
     console.log("MongoDB Error: " + err.message);
   });
 
-//HTML Routes
+//template engine
 app.engine(".html", require("ejs").__express);
 app.set("views", "./views");
 app.set("view engine", "ejs");
+app.set("port", process.env.PORT || 8080);
+
+//server
+/* Create server */
+http.createServer(app).listen(app.get("port"), function () {
+  console.log("Application started on port " + app.get("port"));
+});
 
 //Static Files Images, JS, CSS Styles
 app.use(express.static("public"));
@@ -199,9 +207,9 @@ app.get("/login", (req, res) => {
 
 //Listening on port 3000/wiring up express server
 
-app.listen(port, () => {
-  console.log("Application started and listening on port" + port);
-});
+// app.listen(port, () => {
+//   console.log("Application started and listening on port" + port);
+// });
 
 //Registration Form Post
 app.post("/registration", (req, res, next) => {
