@@ -36,7 +36,7 @@ const Schedule = require("./models/schedule.js");
 const { db } = require("./models/user.js");
 const schedule = require("./models/schedule.js");
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 var CONN = "mongodb+srv://papo:WhoCares$8@buwebdev-cluster-1.omearcz.mongodb.net/testDB?retryWrites=true&w=majority";
 
 //Mongoose connection
@@ -197,12 +197,6 @@ app.get("/login", (req, res) => {
 });
 //Logout
 
-//Listening on port 3000/wiring up express server
-
-app.listen(PORT, () => {
-  console.log("Application started and listening on port " + PORT);
-});
-
 //Registration Form Post
 app.post("/registration", (req, res, next) => {
   const username = req.body.username;
@@ -261,3 +255,9 @@ function isLoggedIn(req, res, next) {
     res.redirect("/index");
   }
 }
+
+//Listening on port 3000/wiring up express server
+
+app.listen(port, () => {
+  console.log("Application started and listening on port " + PORT);
+});
