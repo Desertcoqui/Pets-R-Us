@@ -259,5 +259,5 @@ function isLoggedIn(req, res, next) {
 //Listening on port 3000/wiring up express server
 
 app.listen(port, () => {
-  console.log("Application started and listening on port " + PORT);
+  console.log("Application started and listening on port " + port);
 });
